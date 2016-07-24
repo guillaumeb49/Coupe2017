@@ -5,7 +5,8 @@
   ******************************************************************************
   *
   */
-#include "stm32f4xx.h"
+
+#include "common.h"
 
 
 void SystemClock_Config(void);
