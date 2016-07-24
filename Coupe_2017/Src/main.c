@@ -30,7 +30,7 @@ int main(void)
 	InitPWMMotorD();
 	InitPWMMotorG();
 
-	Init_Timer9();
+	//Init_Timer9();
 
 	printf("%s %s %s\r\n",str_version, __TIME__, __DATE__);
 

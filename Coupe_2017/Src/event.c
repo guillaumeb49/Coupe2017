@@ -10,6 +10,15 @@
 #include <stm32f4xx.h>
 
 /**
+ * System Tick 1 second time base
+ */
+void SysTick_Handler(void)
+{
+
+}
+
+
+/**
  * TROUVER le nom de la fonction d'interruption :
  * Regarder dans startup / startup_stm32.s
  */

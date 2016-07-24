@@ -12,6 +12,7 @@
 /**
  * @brief Initialize Timer 9
  * Timer 9 : Interruption on overflow every 5 ms
+ * The Timer 9 is clocked at 24 MHz
  */
 void Init_Timer9()
 {
@@ -21,7 +22,7 @@ void Init_Timer9()
 
 	TIM9->CR1 |= TIM_CR1_ARPE;
 
-	TIM9->PSC = 2400-1;	// Prescaler value 239+1 = 240 ====> 24MHz /  240 = 100 KHz
+	TIM9->PSC = 2400-1;	// Prescaler value 2399+1 = 2400 ====> 24MHz /  2400 = 10 KHz
 
 	TIM9->ARR = 100-1;
 
