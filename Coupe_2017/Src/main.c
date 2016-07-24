@@ -2,40 +2,57 @@
   ******************************************************************************
   * File Name          : main.c
   * Description        : Main program body
-  ******************************************************************************
-  *
-  */
+  *****************************************************************************/
+/* Includes ------------------------------------------------------------------*/
+#include "stm32f4xx_hal.h"
 
 #include "common.h"
+#include <stdio.h>
 
 
 void SystemClock_Config(void);
 void Error_Handler(void);
 
-/**
- *
- */
+const uint8_t str_version[] = "Carte moteur v1.0a ";
+
+
+
+
 int main(void)
 {
-  // Reset of all peripherals, Initializes the Flash interface and the Systick.
-  HAL_Init();
+	// Variables
 
-  // Configure the system clock
-  SystemClock_Config();
+	/* Reset of all peripherals, Initializes the Flash interface and the Systick. */
+	HAL_Init();
 
-  // Initialize drivers
+	/* Configure the system clock */
+	SystemClock_Config();
+
+	// Initialize Drivers
+	Init_UART2(56400);
+	InitPWMMotorD();
+	InitPWMMotorG();
+
+	printf("%s %s %s\r\n",str_version, __TIME__, __DATE__);
+
+	F_SetPWMMotorG_chB(75);
+	F_SetPWMMotorG_chA(25);
 
 
 
-
-
-  // Infinite loop
   while (1)
   {
 
   }
 
 }
+
+
+
+
+
+
+
 
 /** System Clock Configuration
 */
@@ -49,11 +66,10 @@ void SystemClock_Config(void)
 
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
-  RCC_OscInitStruct.HSIState = RCC_HSI_ON;
-  RCC_OscInitStruct.HSICalibrationValue = 16;
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
+  RCC_OscInitStruct.HSEState = RCC_HSE_ON;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
-  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSI;
+  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
   RCC_OscInitStruct.PLL.PLLM = 8;
   RCC_OscInitStruct.PLL.PLLN = 192;
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV4;
@@ -69,7 +85,7 @@ void SystemClock_Config(void)
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
-  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_3) != HAL_OK)
+  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_1) != HAL_OK)
   {
     Error_Handler();
   }
@@ -82,6 +98,9 @@ void SystemClock_Config(void)
   HAL_NVIC_SetPriority(SysTick_IRQn, 0, 0);
 }
 
+/* USER CODE BEGIN 4 */
+
+/* USER CODE END 4 */
 
 /**
   * @brief  This function is executed in case of error occurrence.
@@ -118,3 +137,12 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 #endif
 
+/**
+  * @}
+  */ 
+
+/**
+  * @}
+*/ 
+
+/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

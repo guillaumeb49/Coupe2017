@@ -1,34 +1,22 @@
-/**
-  ******************************************************************************
-  * @file    event.c
-  * @brief   Interrupt Service Routines.
-  *
-  * @author Guillaume BITAUD
-  *****************************************************************************/
+/*
+ * event.c
+ *
+ *  Created on: 22 juil. 2016
+ *      Author: guill
+ */
+
 
 #include "event.h"
 
-
-
-
-/******************************************************************************/
-/*            Cortex-M4 Processor Interruption and Exception Handlers         */ 
-/******************************************************************************/
-
 /**
-* @brief This function handles System tick timer.
-*/
-void SysTick_Handler(void)
+ * TROUVER le nom de la fonction d'interruption :
+ * Regarder dans startup / startup_stm32.s
+ */
+void TIM1_BRK_TIM9_IRQHandler(void)
 {
-  HAL_IncTick();
-  HAL_SYSTICK_IRQHandler();
-
+	if(TIM9->SR & TIM_SR_UIF)
+	{
+		TIM9->SR &= ~TIM_SR_UIF;
+		GPIOD->ODR ^= GPIO_ODR_ODR_15;
+	}
 }
-
-/******************************************************************************/
-/* STM32F4xx Peripheral Interrupt Handlers                                    */
-/* Add here the Interrupt Handlers for the used peripherals.                  */
-/* For the available peripheral interrupt handler names,                      */
-/* please refer to the startup file (startup_stm32f4xx.s).                    */
-/******************************************************************************/
-
