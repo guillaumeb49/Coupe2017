@@ -8,14 +8,19 @@
 #ifndef COMMON_H_
 #define COMMON_H_
 
-#include <D_GPIO.h>
+
 #include <stdio.h>
 
+#include "event.h"
+
 #include "stm32f4xx.h"
+#include "D_SysTick.h"
+#include "D_GPIO.h"
 #include "D_QEI.h"
 #include "D_PWM.h"
 #include "D_UART.h"
 #include "D_TIMER.h"
+
 
 #define LED_RED_1   GPIO_ODR_ODR_14
 #define LED_RED_2   GPIO_ODR_ODR_9

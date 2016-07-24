@@ -16,12 +16,16 @@ const uint8_t str_version[] = "Carte moteur v1.0a ";
 int main(void)
 {
 	// Variables
+	hundred_ms_from_start = 0;
+
+
 
 	/* Reset of all peripherals, Initializes the Flash interface and the Systick. */
 	HAL_Init();
 
 	/* Configure the system clock */
 	SystemClock_Config();
+	Init_SysTick();
 
 	// Initialize Drivers
 	Init_GPIO();
@@ -30,18 +34,20 @@ int main(void)
 	InitPWMMotorD();
 	InitPWMMotorG();
 
-	//Init_Timer9();
+	Init_Timer9();
 
 	printf("%s %s %s\r\n",str_version, __TIME__, __DATE__);
 
 	F_SetPWMMotorG_chB(75);
 	F_SetPWMMotorG_chA(25);
+	F_Start_SysTick();
 
 
 
   while (1)
   {
-
+	  F_Delay_Systick(10);
+	  GPIOD->ODR ^= GPIO_ODR_ODR_14;
   }
 
 }
@@ -89,12 +95,6 @@ void SystemClock_Config(void)
     Error_Handler();
   }
 
-  HAL_SYSTICK_Config(HAL_RCC_GetHCLKFreq()/1000);
-
-  HAL_SYSTICK_CLKSourceConfig(SYSTICK_CLKSOURCE_HCLK);
-
-  /* SysTick_IRQn interrupt configuration */
-  HAL_NVIC_SetPriority(SysTick_IRQn, 0, 0);
 }
 
 /* USER CODE BEGIN 4 */
