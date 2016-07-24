@@ -1,8 +1,3 @@
-/**
-  ******************************************************************************
-  * File Name          : main.c
-  * Description        : Main program body
-  *****************************************************************************/
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx_hal.h"
 
@@ -29,9 +24,13 @@ int main(void)
 	SystemClock_Config();
 
 	// Initialize Drivers
+	Init_GPIO();
+
 	Init_UART2(56400);
 	InitPWMMotorD();
 	InitPWMMotorG();
+
+	Init_Timer9();
 
 	printf("%s %s %s\r\n",str_version, __TIME__, __DATE__);
 

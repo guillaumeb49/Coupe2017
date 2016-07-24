@@ -6,7 +6,7 @@
  */
 #include "D_GPIO.h"
 
-void init_GPIO(void){
+void Init_GPIO(void){
 
 	// ######### Configuring Clocks  #########
 	RCC->AHB1ENR |= RCC_AHB1ENR_GPIOAEN; // Port A : clock enable

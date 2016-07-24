@@ -10,15 +10,15 @@
 
 #include "common.h"
 
-void init_GPIO(void);
-void set_led_blue(int);
-void set_led_green(int);
-void set_led_red(int);
-void set_led_orange(int);
-int get_led_blue(void);
-int get_led_green(void);
-int get_led_red(void);
-int get_led_orange(void);
-int get_btn(void);
+void Init_GPIO(void);
+void Set_led_blue(int);
+void Set_led_green(int);
+void Set_led_red(int);
+void Set_led_orange(int);
+int Get_led_blue(void);
+int Get_led_green(void);
+int Get_led_red(void);
+int Get_led_orange(void);
+int Get_btn(void);
 
 #endif /* D_GPIO_H_ */

@@ -11,6 +11,6 @@
 #include <stm32f4xx.h>
 
 
-void F_Init_Timer9();
+void Init_Timer9();
 
 #endif /* D_TIMER_H_ */

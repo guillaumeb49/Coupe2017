@@ -34,9 +34,9 @@ void InitPWMMotorD(void)
 
 	// Init Timer 1 CH2
 	RCC->APB2ENR |= RCC_APB2ENR_TIM1EN;	// Enable clock on timer 1
-	TIM1->PSC = 3;	// Prescaler
+	TIM4->PSC = 6-1;	// Prescaler
 
-	TIM1->ARR = 1000 - 1;	// Approximatlty 25 KHz (PWM Frequency)
+	TIM4->ARR = 160 - 1;	// 25 KHz (PWM Frequency)
 
 	TIM1->CCMR1 |= TIM_CCMR1_OC2M_1 | TIM_CCMR1_OC2M_2;	// PWM mode 1 upcounting
 	TIM1->CCMR1 &= ~TIM_CCMR1_OC2M_0;
@@ -79,7 +79,7 @@ void F_SetPWMMotorD(int new_pwm_value)
  */
 void F_SetPWMMotorD_chA(float new_cha_value)
 {
-	TIM1->CCR2 = (int)new_cha_value*10; 	// Set duty cycle to 0%
+	TIM1->CCR2 = (int)new_cha_value*1.6; 	// Set duty cycle to 0%
 }
 
 /**
@@ -87,7 +87,7 @@ void F_SetPWMMotorD_chA(float new_cha_value)
  */
 void F_SetPWMMotorD_chB(float new_chb_value)
 {
-	TIM1->CCR3 = (int) new_chb_value*10; 	// Set duty cycle to 0%
+	TIM1->CCR3 = (int)new_chb_value*1.6; 	// Set duty cycle to 0%
 }
 
 
@@ -118,9 +118,9 @@ void InitPWMMotorG(void)
 
 	// Init Timer 4 CH2
 	RCC->APB1ENR |= RCC_APB1ENR_TIM4EN;	// Enable clock on timer 1
-	TIM4->PSC = 3;	// Prescaler
+	TIM4->PSC = 6-1;	// Prescaler
 
-	TIM4->ARR = 1000 - 1;	// Approximatlty 25 KHz (PWM Frequency)
+	TIM4->ARR = 160 - 1;	// 25 KHz (PWM Frequency)
 
 	TIM4->CCMR1 |= TIM_CCMR1_OC2M_1 | TIM_CCMR1_OC2M_2;	// PWM mode 1 upcounting
 	TIM4->CCMR1 &= ~TIM_CCMR1_OC2M_0;
@@ -163,7 +163,7 @@ void F_SetPWMMotorG(int new_pwm_value)
  */
 void F_SetPWMMotorG_chA(float new_cha_value)
 {
-	TIM4->CCR2 = (int)new_cha_value*10; 	// Set duty cycle to 0%
+	TIM4->CCR2 = (int)new_cha_value*1.6; 	// Set duty cycle to 0%
 }
 
 /**
@@ -171,5 +171,5 @@ void F_SetPWMMotorG_chA(float new_cha_value)
  */
 void F_SetPWMMotorG_chB(float new_chb_value)
 {
-	TIM4->CCR3 = (int)new_chb_value*10; 	// Set duty cycle to 0%
+	TIM4->CCR3 = (int)new_chb_value*1.6; 	// Set duty cycle to 0%
 }

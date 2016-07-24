@@ -13,7 +13,7 @@
  * @brief Initialize Timer 9
  * Timer 9 : Interruption on overflow every 5 ms
  */
-void F_Init_Timer9()
+void Init_Timer9()
 {
 
 	RCC->APB2ENR |= RCC_APB2ENR_TIM9EN;
@@ -21,9 +21,9 @@ void F_Init_Timer9()
 
 	TIM9->CR1 |= TIM_CR1_ARPE;
 
-	TIM9->PSC = 5023-1;	// Prescaler value 49+1 = 50 ====> 50MHz /  50 = 1MHz
+	TIM9->PSC = 2400-1;	// Prescaler value 239+1 = 240 ====> 24MHz /  240 = 100 KHz
 
-	TIM9->ARR = 102-1;
+	TIM9->ARR = 100-1;
 
 	TIM9->DIER |= TIM_DIER_UIE;	// Enable interrupt
 

@@ -35,15 +35,15 @@ void Init_UART2(long bauds)
 	//USART1 initialization settings
 	UART_HandleTypeDef uart;
 
-	uart.Init.BaudRate = bauds; // baud rate setting
-	uart.Init.WordLength = UART_WORDLENGTH_8B; // word is 8 bits of data format
-	uart.Init.StopBits = UART_STOPBITS_1; // a stop bit
-	uart.Init.Parity = UART_PARITY_NONE; // no parity
-	uart.Init.HwFlowCtl = UART_HWCONTROL_NONE; // no hardware flow control data
-	uart.Init.Mode = UART_MODE_RX | UART_MODE_TX;
-
-HAL_UART_Init(&uart);
-
+	uart.Instance = USART2;
+	uart.Init.BaudRate = bauds;
+	uart.Init.WordLength = UART_WORDLENGTH_8B;
+	uart.Init.StopBits = UART_STOPBITS_1;
+	uart.Init.Parity = UART_PARITY_NONE;
+	uart.Init.Mode = UART_MODE_TX_RX;
+	uart.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+	uart.Init.OverSampling = UART_OVERSAMPLING_16;
+	HAL_UART_Init(&uart);
 	USART2->CR1 |= USART_CR1_UE | USART_CR1_TE | USART_CR1_RE;
 }
 
